@@ -211,303 +211,240 @@ Konsep skema relasional berasal *dari Relational Model* yang diperkenalkan oleh 
 
 Selain digunakan sebagai dokumentasi perancangan, skema relasional juga berperan dalam menjaga integritas data. Hubungan antar tabel yang dibentuk melalui *Foreign Key* membantu mengurangi redundansi data dan mencegah terjadinya anomali pada proses penyisipan, pembaruan, maupun penghapusan data (Lemahieu et al., 2018). Oleh karena itu, penyusunan skema relasional yang baik menjadi salah satu faktor penting dalam pengembangan sistem informasi.
 
-## 
+## BAB III ANALISIS DAN PERANCANGAN 
+Bab ini membahas tahapan analisis dan perancangan aplikasi mobile yang dikembangkan untuk mendukung analisis aktivitas gelombang otak dalam terapi Virtual Reality Dental Hypnosis (VRDH). Analisis dilakukan untuk mengidentifikasi kebutuhan pengguna, kebutuhan data, serta kebutuhan sistem secara keseluruhan, sedangkan perancangan difokuskan pada penyusunan solusi aplikasi yang sesuai dengan kebutuhan tersebut. Tahapan ini bertujuan agar aplikasi yang dikembangkan dapat berjalan secara terarah, efektif, dan sesuai dengan tujuan pengembangan sistem.
+3.1	Tahap Perencanaan
+Tahap perencanaan dilakukan melalui proses eksplorasi kebutuhan sistem dengan melakukan diskusi dengan pihak terkait untuk memahami kebutuhan pengguna serta proses bisnis yang berjalan. Kegiatan diskusi pertama dilaksanakan pada tanggal 18 Januari 2026 bersama Dr. Andri Abdurochman, S.Si., M.T. dan Dr. Gilang Yubiliana, drg., M.Kes selaku stakeholder.
+Berdasarkan hasil diskusi tersebut, diperoleh identifikasi awal kebutuhan sistem yang kemudian disusun dalam bentuk user story dan user requirement. Pada tahap awal, kebutuhan sistem dibagi ke dalam tiga aktor utama, yaitu perawat, dokter, dan pasien. Masing-masing aktor memiliki kebutuhan dan peran yang berbeda dalam penggunaan sistem terapi VRDH. Hasil identifikasi kebutuhan awal tersebut ditunjukkan pada Tabel 3.1 dan Tabel 3.2.  
 
-## BAB III
+Aktor	User Story
+Perawat	Sebagai seorang perawat, saya ingin menambahkan dan mengelola data pasien, sehingga data pasien dapat tersimpan dengan rapi dan mudah diakses saat proses terapi berlangsung.
+	Sebagai seorang perawat, saya ingin melihat daftar pasien yang terdaftar dalam sistem, sehingga saya dapat memantau pasien yang akan menjalani terapi.
+	Sebagai seorang perawat, saya ingin melihat riwayat sesi terapi pasien, sehingga saya dapat mengetahui perkembangan terapi pasien.
+Dokter	Sebagai seorang dokter, saya ingin login dan mengakses sistem sesuai peran saya.
+	Sebagai seorang dokter, saya ingin melihat daftar pasien yang saya tangani, sehingga saya dapat memantau pasien yang menjalani terapi.
+	Sebagai seorang dokter, saya ingin memulai sesi terapi baru, sehingga proses terapi dapat dilakukan dan dicatat oleh sistem.
+	Sebagai seorang dokter, saya ingin melakukan monitoring sinyal EEG pasien secara real-time, sehingga saya dapat memantau kondisi pasien selama terapi berlangsung.
+	Sebagai seorang dokter, saya ingin melihat status hipnosis pasien berdasarkan data EEG, sehingga saya dapat mengetahui tingkat relaksasi atau hipnosis pasien.
+	Sebagai seorang dokter, saya ingin mengetahui scene VR yang sedang aktif, sehingga saya dapat memastikan terapi VR berjalan sesuai skenario.
+	Sebagai seorang dokter, saya ingin mengakhiri sesi terapi dan menyimpan data sesi ke basis data cloud, sehingga data terapi dapat tersimpan secara aman dan terpusat.
+	Sebagai seorang dokter, saya ingin mengisi catatan terapi untuk setiap sesi, sehingga hasil observasi dan evaluasi terapi dapat terdokumentasi.
+	Sebagai seorang dokter, saya ingin melihat riwayat sesi terapi pasien, sehingga saya dapat mengevaluasi perkembangan terapi pasien dari waktu ke waktu.
+Pasien	Sebagai seorang pasien, saya ingin melakukan registrasi dan login akun, sehingga saya dapat mengakses layanan terapi secara pribadi dan aman.
+	Sebagai seorang pasien, saya ingin melihat riwayat terapi yang pernah saya jalani, sehingga saya dapat mengetahui perkembangan terapi saya.
+	Sebagai seorang pasien, saya ingin melihat ringkasan hasil setiap sesi terapi, sehingga saya dapat memahami hasil terapi yang telah dilakukan.
+	Sebagai seorang pasien, saya ingin membaca informasi edukatif mengenai hipnosis dan terapi VRDH, sehingga saya dapat memahami proses terapi yang akan dijalani.
+	Sebagai seorang pasien, saya ingin memberikan feedback setelah sesi terapi, sehingga saya dapat menyampaikan pengalaman dan evaluasi terhadap terapi yang diberikan.
+	Selanjutnya, dilakukan pertemuan kedua pada tanggal 18 April 2026 untuk mendiskusikan kembali hasil user story yang telah disusun sebelumnya. Pada pertemuan ini dilakukan evaluasi terhadap rancangan aktor dan alur sistem agar lebih sesuai dengan implementasi di lapangan. Berdasarkan hasil diskusi bersama stakeholder, diputuskan bahwa beberapa peran seperti perawat, dan dokter memiliki fungsi yang saling berkaitan dalam pengoperasian sistem, sehingga struktur aktor disederhanakan menjadi satu aktor utama, yaitu tenaga medis. 
+Selain itu, aktor pasien untuk sementara tidak dilibatkan dalam revisi user story karena penelitian masih berada pada tahap awal pengembangan sistem. Pada tahap ini, fokus utama sistem adalah pengolahan, monitoring, dan evaluasi data terapi dari sisi tenaga medis. Oleh karena itu, fitur yang berkaitan dengan akses langsung oleh pasien, seperti melihat hasil terapi atau memberikan feedback, belum menjadi prioritas pengembangan dan akan dipertimbangkan pada tahap pengembangan berikutnya. Hasil revisi user story berdasarkan diskusi kedua ditunjukkan pada Tabel 3.3.
+Tabel 3.1 User Stories
+Aktor	User Story
+Tenaga Medis	Sebagai tenaga medis, saya ingin melakukan otentikasi untuk masuk ke dalam sistem menggunakan kredential yang valid, sehingga keamanan data dan rekam medis pasien dapat terjamin.
+	Sebagai tenaga medis, saya ingin melihat dan memperbarui data diri saya.
+	Sebagai tenaga medis, saya ingin melihat dan mencari daftar pasien yang saya tangani.
+	Sebagai tenaga medis, saya ingin menambah, mengubah, ataupun menghapus data pasien.
+	Sebagai tenaga medis, saya ingin mengisi instrumen evaluasi pra-induksi dan pasca-induksi untuk setiap pasien, sehingga saya dapat menganalisis perubahan tingkat kecemasan pasien sebagai tolak ukur hasil terapi.
+	Sebagai tenaga medis, saya ingin melakukan pengecekan konektivitas perangkat Virtual Reality (VR) dan Elektroensefalogram (EEG) dengan aplikasi mobile sebelum sesi dimulai, sehingga proses terapi dapat berjalan dengan baik.
+	Sebagai tenaga medis, saya ingin mengontrol keberlangsungan terapi, yakni mengakhiri dan memberhentikan terapi.
+	Sebagai tenaga medis, saya ingin sistem merekam dan menyimpan seluruh data sesi yang telah selesai.
+	Sebagai tenaga medis, saya ingin mengakses daftar riwayat sesi terapi pasien, sehingga saya dapat melakukan evaluasi perkembangan kecemasan pasien.
+	Sebagai tenaga medis, saya ingin menghapus entri riwayat sesi yang tidak valid, sehingga kualitas data observasi medis tetap terjaga.
 
-**ANALISIS DAN PERANCANGAN**
+Tabel 3.2 User Requirement
+Kode	User Requirement
+UR-D01	Sistem harus menyediakan fitur autentikasi login bagi dokter menggunakan kredensial yang valid.
+UR-D02	Sistem harus membatasi akses sistem hanya kepada tenaga medis yang berhasil terautentikasi.
+UR-D03	Sistem harus menyediakan fitur untuk melihat data profil profesional dokter.
+UR-D04	Sistem harus menyediakan fitur untuk memperbarui data profil profesional dokter.
+UR-D05	Sistem harus menampilkan daftar pasien yang ditangani oleh dokter.
+UR-D06	Sistem harus menyediakan fitur pencarian data pasien berdasarkan nama, ID, atau informasi tertentu.
+UR-D07	Sistem harus menyediakan fitur penambahan data pasien baru.
+UR-D08	Sistem harus menyediakan fitur perubahan data pasien.
+UR-D09	Sistem harus menyediakan fitur penghapusan data pasien.
+UR-D10	Sistem harus menyediakan formulir evaluasi pra-induksi untuk setiap pasien.
+UR-D11	Sistem harus menyediakan formulir evaluasi pasca-induksi untuk setiap pasien.
+UR-D12	Sistem harus menyimpan hasil evaluasi pra-induksi dan pasca-induksi pasien.
+UR-D13	Sistem harus menyediakan fitur validasi konektivitas perangkat Virtual Reality (VR) dengan aplikasi mobile sebelum terapi dimulai.
+UR-D14	Sistem harus menyediakan fitur validasi konektivitas perangkat Electroencephalogram (EEG) dengan aplikasi mobile sebelum terapi dimulai.
+UR-D15	Sistem harus menyediakan fitur untuk memulai, menghentikan sementara, dan mengakhiri sesi terapi.
+UR-D16	Sistem harus merekam seluruh data sesi terapi yang telah selesai.
+UR-D17	Sistem harus menyimpan riwayat sesi terapi pasien ke dalam basis data.
+UR-D18	Sistem harus menampilkan daftar riwayat sesi terapi pasien kepada dokter.
+UR-D19	Sistem harus menyediakan fitur evaluasi perkembangan tingkat kecemasan pasien berdasarkan riwayat terapi.
+UR-D20	Sistem harus menyediakan fitur penghapusan riwayat sesi terapi yang tidak valid.
 
-Bab ini membahas tahapan analisis dan perancangan aplikasi *mobile* yang dikembangkan untuk mendukung analisis aktivitas gelombang otak dalam terapi *Virtual Reality Dental Hypnosis* (VRDH). Analisis dilakukan untuk mengidentifikasi kebutuhan pengguna, kebutuhan data, serta kebutuhan sistem secara keseluruhan, sedangkan perancangan difokuskan pada penyusunan solusi aplikasi yang sesuai dengan kebutuhan tersebut. Tahapan ini bertujuan agar aplikasi yang dikembangkan dapat berjalan secara terarah, efektif, dan sesuai dengan tujuan pengembangan sistem.
+3.1.1	Kebutuhan Perangkat Lunak
+Kebutuhan perangkat lunak yang digunakan dalam proses pengembangan adalah sebagai berikut:
+1.	Sistem Operasi: Windows 10/11 64-bit
+2.	Visual Studio Code: Sebagai code editor dalam pengembangan aplikasi.
+3.	Node.js: Sebagai runtime environment untuk menjalankan React Native.
+4.	React Native: Framework utama dalam pengembangan aplikasi mobile berbasis TypeScript.
+5.	Android Studio & Android SDK: Digunakan untuk proses build, debugging, dan emulator Android.
+6.	Supabase: Digunakan sebagai layanan backend meliputi autentikasi pengguna, database PostgreSQL, dan penyimpanan file berbasis cloud.
+7.	PostgreSQL: Sistem manajemen basis data relasional untuk penyimpanan data terstruktur.
+8.	Library Bluetooth React Native: Digunakan untuk komunikasi data antara aplikasi dan perangkat EEG melalui koneksi Bluetooth.
+9.	Library Visualisasi Grafik: Digunakan untuk menampilkan grafik sinyal EEG.
+3.1.2	Kebutuhan Perangkat Keras
+Perangkat keras yang digunakan dalam pengembangan dan pengujian aplikasi mobile ini terdiri dari perangkat pengembangan serta perangkat pendukung terapi VRDH. Perangkat keras yang digunakan untuk proses pengembangan aplikasi adalah sebagai berikut:
+1.	Processor		: 11th Gen Intel(R) Core (TM) i5-1135G7 2.42 GHz
+2.	Installed RAM		: 16.0 GB 
+3.	System type		: 64-bit operating system, x64-based processor
+4.	Resolusi Layar		: 1920 x 1080
+5.	Penyimpanan (Storage) : SSD 512 GB
+Aplikasi yang dikembangkan perlu dijalankan pada perangkat smartphone berbasis Android yang mendukung konektivitas Bluetooth. Perangkat ini berfungsi sebagai media utama untuk menampilkan antarmuka monitoring, menerima data sinyal EEG, serta mengelola penyimpanan dan sinkronisasi data. Dukungan Bluetooth menjadi komponen penting karena komunikasi antara aplikasi dan perangkat EEG dilakukan secara wireless.
+Selanjutnya, perangkat penyadap sinyal EEG digunakan untuk menangkap aktivitas sinyal otak pasien selama terapi berlangsung. Perangkat ini mengirimkan data sinyal EEG beserta status hipnosis secara berkala melalui koneksi Bluetooth dengan interval tertentu. Data yang diterima kemudian diproses dan ditampilkan pada aplikasi untuk keperluan monitoring serta disimpan sebagai bagian dari rekaman sesi terapi.
+Selain itu, terapi didukung oleh perangkat Virtual Reality berupa Meta Quest yang digunakan untuk menampilkan stimulus visual dalam metode VRDH. Perangkat VR ini menjalankan skenario atau scene terapi yang dirancang sesuai kebutuhan stimulus. Aplikasi mobile tidak melakukan streaming tampilan VR secara langsung, melainkan menerima dan mencatat informasi scene yang sedang aktif sebagai metadata yang dapat disinkronkan dengan data EEG berdasarkan waktu sesi.
+3.2	Tahap Desain
+Tahap desain dalam metode Extreme Programming (XP) berfokus pada perancangan antarmuka sistem secara sederhana, jelas, dan mudah dipahami oleh pengguna. Desain yang dihasilkan bersifat iteratif dan disesuaikan dengan kebutuhan pengguna berdasarkan user story yang telah dikumpulkan. Pada bagian ini dijelaskan rancangan antarmuka sistem yang digunakan dalam aplikasi. 
+3.2.1	Use Case Diagram
+Pada tahap pemodelan kebutuhan sistem ini dilakukan agar lebih mudah dalam melanjutkan pada tahap yang selanjutnya yaitu melakukan perancangan sistem. Peneliti melakukan pemodelan menggunakan Unified Modeling Language (UML). Diagram yang akan digunakan antara lain use case diagram dan activity diagram. Pemodelan kebutuhan sistem ini akan dibuat berdasarkan tabel fungsionalitas sistem Tabel 4.3 yang telah diverifikasi oleh stackholder (Lampiran B).
+ 
+Gambar x.x Use Case Diagram
+3.1.2	Activity Diagram
+A.	Proses Login
+ 
+Gambar x.x Activity Diagram Halaman Home
 
-|    |    |
-|----|----|
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
+B.	Proses Edit Profile
+Halaman Edit Profile memungkinkan pengguna untuk memperbarui informasi akun mereka. Pengguna dapat mengubah data seperti nama, email, atau informasi lainnya sesuai kebutuhan.
+Sistem akan melakukan validasi sebelum data disimpan untuk memastikan keakuratan informasi. Setelah perubahan berhasil, data akan diperbarui secara otomatis di sistem.
+ 
+Gambar x.x
+C.	Proses Lihat dan Cari Data Pasien
+Halaman daftar pasien digunakan untuk menampilkan seluruh data pasien yang telah terdaftar dalam sistem. Data pasien ditampilkan dalam bentuk list sehingga memudahkan pengguna untuk melihat informasi secara cepat dan terstruktur. Selain itu, pengguna juga dapat melakukan pencarian data pasien dan mengakses detail informasi pasien yang dipilih. Gambar x.x menunjukkan activity diagram untuk proses melihat dan mencari data pasien. Melalui proses tersebut, pengguna dapat mengelola data pasien secara lebih efisien.
+Selanjutnya, rancangan antarmuka halaman daftar pasien juga ditunjukkan pada Gambar x.x. Tampilan ini menggambarkan desain halaman daftar pasien yang akan digunakan pengguna, meliputi daftar data pasien, fitur pencarian, tombol navigasi ke detail pasien, serta elemen antarmuka lainnya yang mendukung kemudahan pengelolaan data pasien.
+ 
+Gambar x.x
+D.	Proses Melihat Riwayat Sesi
+Halaman riwayat sesi digunakan untuk menampilkan seluruh catatan sesi terapi yang telah dilakukan terhadap pasien. Informasi yang ditampilkan mencakup tanggal sesi, durasi, serta hasil atau catatan dari sesi terapi yang telah dilakukan.  Selain itu, halaman ini juga menyediakan fitur filter berdasarkan status sehingga pengguna dapat menampilkan seluruh data sesi, sesi yang berhasil, maupun sesi yang tidak berhasil. Gambar x.x menunjukkan activity diagram untuk proses melihat dan memfilter data historis terapi. 
+Selanjutnya, rancangan antarmuka halaman riwayat sesi juga ditunjukkan pada Gambar x.x. Tampilan ini menggambarkan desain halaman riwayat sesi yang akan digunakan pengguna, meliputi daftar riwayat sesi terapi, informasi detail sesi, tombol filter, serta elemen antarmuka lainnya yang mendukung kemudahan pengguna dalam memantau perkembangan pasien.
+ 
+Gambar x.x
+E.	Proses Tambah Pasien
+Halaman Home merupakan tampilan awal yang muncul ketika pengguna berhasil masuk ke dalam sistem. Halaman ini berfungsi sebagai pusat navigasi utama yang mengarahkan pengguna ke fitur-fitur penting dalam aplikasi. Pada halaman ini ditampilkan beberapa menu utama seperti daftar pasien, riwayat sesi, serta akses ke profil pengguna.
+Desain halaman Home dibuat sederhana dengan tujuan agar pengguna dapat dengan cepat memahami fungsi utama aplikasi tanpa kebingungan. Elemen visual dibuat minimalis dengan penempatan menu yang jelas sehingga meningkatkan pengalaman pengguna dalam mengakses fitur yang tersedia.
+ 
+Gambar x.x
+F.	Proses Edit Pasien
+Halaman Edit Pasien digunakan untuk memperbarui data pasien yang sudah ada. Pengguna dapat mengubah informasi jika terdapat kesalahan atau perubahan data pasien.
+Sistem memastikan bahwa perubahan yang dilakukan tetap konsisten dengan data yang sudah tersimpan sebelumnya. Dengan fitur ini, data pasien dapat selalu terjaga akurasinya.
+ 
+Gambar x.x
+3.1.3	Desain Database
+Kebutuhan data pada pengembangan aplikasi mobile ini dirancang untuk mendukung operasional terapi VRDH yang dilakukan oleh tenaga medis dalam melakukan monitoring dan pengelolaan sesi terapi pasien. Data yang digunakan difokuskan pada kebutuhan utama sistem, yaitu autentikasi dokter, pengelolaan data pasien, serta pencatatan aktivitas terapi dan monitoring EEG selama sesi berlangsung. 
+A.	Data Tenaga Medis
+Data tenaga medis digunakan untuk menyimpan informasi akun tenaga medis yang menggunakan sistem. Data ini digunakan untuk proses login dan identifikasi dokter pada setiap sesi terapi.
+Tabel 3.1 Data Tenaga Medis
+Nama Data	Sumber	Tipe Data	Keterangan
+id	Sistem	UUID	Identitas unik tenaga medis.
+email	Input tenaga medis/admin	VARCHAR(255)	Digunakan untuk login dan identitas akun.
+nama	Input tenaga medis/admin	VARCHAR(255)	Nama lengkap tenaga medis.
+nomor_telepon	Input tenaga medis	VARCHAR(20)	Nomor telepon tenaga medis
+created_at	Sistem	TIMESTAMP	Waktu pembuatan akun.
+updated_at	Sistem	TIMESTAMP	Waktu pembaruan data tenaga medis.
+B.	Data Pasien
+Data pasien digunakan untuk menyimpan informasi pasien yang menjalani terapi VRDH. Struktur data pasien ditunjukkan pada Tabel 3.2.
+Tabel 3.6 Data Pasien
+Nama Data	Sumber	Tipe Data	Keterangan
+patient_id	Sistem	UUID	Identitas unik pasien.
+full_name	Input dokter	String	Nama lengkap pasien.
+date_of_birth	Input dokter	Date	Tanggal lahir pasien.
+gender	Input dokter	Enum/String	Jenis kelamin pasien.
+created_at	Sistem	Timestamp	Waktu pembuatan data pasien.
+updated_at	Sistem	Timestamp	Waktu pembaruan data pasien.
+C.	Data Sesi Terapi
+Struktur data sesi terapi yang ditunjukkan pada Tabel 3.9 digunakan untuk mencatat setiap pelaksanaan terapi VRDH. Data ini menghubungkan pasien, dokter, dan klinik dalam satu entitas yang merepresentasikan aktivitas terapi secara lengkap. Informasi waktu mulai, waktu selesai, serta status sesi memungkinkan sistem melakukan pelacakan riwayat terapi secara terstruktur.
+Tabel 3.9 Data Sesi Terapi
+Nama Data	Sumber	Tipe Data	Keterangan
+id	Sistem	UUID	Identitas unik sesi terapi.
+id_tenaga_medis	Relasi tabel tenaga_medis	UUID	Referensi tenaga medis yang menangani sesi terapi.
+id_pasien	Relasi tabel pasien	UUID	Referensi pasien yang menjalani sesi terapi.
+status_sesi	Input sistem/dokter	VARCHAR(20)	Status sesi terapi.
+waktu_mulai	Sistem	TIMESTAMP	Waktu mulai sesi terapi.
+waktu_selesai	Sistem	TIMESTAMP	Waktu selesai sesi terapi.
+durasi_detik	Sistem	INTEGER	Durasi sesi terapi dalam detik.
+created_at	Sistem	TIMESTAMP	Waktu pembuatan data sesi terapi.
+updated_at	Sistem	TIMESTAMP	Waktu pembaruan data sesi terapi.
+D.	Data Sesi Terapi
+Struktur data event scene VR sebagaimana terlihat pada Tabel 3.10 digunakan untuk mencatat perubahan stimulus visual selama sesi berlangsung. Pencatatan dilakukan berbasis waktu sehingga dapat disinkronkan dengan data sinyal EEG yang diterima sistem. Pendekatan ini memungkinkan analisis hubungan antara perubahan stimulus dan respons aktivitas otak pasien.
+Tabel 3.10 Data Scene VR
+Nama Data	Sumber	Tipe Data	Keterangan
+vr_event_id	Sistem	UUID	Identitas unik event VR
+session_id	Sistem	UUID	Relasi ke sesi terapi
+scene_id	Sistem/VR	UUID	Scene yang aktif
+stimulus_level	Sistem/VR	Enum/String	LOW/MEDIUM/HIGH (snapshot)
+event_type	Sistem	Enum/String	SCENE_START, SCENE_END, SCENE_CHANGE
+event_time	Sistem/VR	Timestamp	Waktu perubahan scene terjadi
 
-|    |    |
-|----|----|
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-
-|    |    |
-|----|----|
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |
-|----|----|
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-
-|    |    |
-|----|----|
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-
-|    |    |
-|----|----|
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-
-|    |    |
-|----|----|
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-|    |    |
-
-<!-- image -->
-
-    <!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-|    |    |    |    |
-|----|----|----|----|
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-|    |    |    |    |
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-<!-- image -->
-
-Mengingat aplikasi ini dikembangkan menggunakan kerangka kerja React Native yang ditujukan untuk memfasilitasi komunikasi perangkat keras medis secara real-time di platform mobile, pengujian tidak hanya dititikberatkan pada keberhasilan sistem secara teknis, tetapi juga pada kualitas interaksi pengguna *(User Experience* ). Oleh karena itu, tahap pengujian pada penelitian ini dibagi menjadi tiga pendekatan utama:
-
-1. Pengujian Fungsionalitas Sistem (Black-Box Testing)
-
+3.1.4	Perancangan Antarmuka Sistem
+A.	Halaman Login
+Rancangan antarmuka halaman login juga ditunjukkan pada Gambar x.x. Tampilan ini menggambarkan desain halaman login yang akan digunakan pengguna, meliputi form input email dan password, tombol login, serta elemen antarmuka lainnya yang mendukung kemudahan penggunaan aplikasi.
+ 
+Gambar x.x Activity Diagram Halaman Home
+B.	Halaman Home
+ Gambar x.x menunjukkan desain halaman home yang dirancang dengan tampilan sederhana dan penempatan menu yang jelas agar pengguna dapat dengan mudah memahami dan mengakses fitur-fitur yang tersedia dalam aplikasi.
+ 
+Gambar x.x
+C.	Halaman Profile Pengguna
+Halaman Profile menampilkan informasi akun pengguna yang sedang login. Informasi ini mencakup nama, email, serta detail lainnya yang terkait dengan akun.
+Halaman ini juga menjadi pusat akses untuk melakukan perubahan data profil atau pengaturan akun. Desain dibuat sederhana agar pengguna mudah mengakses informasi pribadi mereka.
+ 
+Gambar x.x
+D.	Halaman Edit Profile
+Halaman Edit Profile memungkinkan pengguna untuk memperbarui informasi akun mereka. Pengguna dapat mengubah data seperti nama, email, atau informasi lainnya sesuai kebutuhan.
+Sistem akan melakukan validasi sebelum data disimpan untuk memastikan keakuratan informasi. Setelah perubahan berhasil, data akan diperbarui secara otomatis di sistem.
+ 
+Gambar x.x
+E.	Halaman Daftar Pasien
+Rancangan antarmuka halaman daftar pasien ditunjukkan pada Gambar x.x. Tampilan ini menggambarkan desain halaman daftar pasien yang akan digunakan pengguna, meliputi daftar data pasien, fitur pencarian, tombol navigasi ke detail pasien, serta elemen antarmuka lainnya yang mendukung kemudahan pengelolaan data pasien.
+ 
+Gambar x.x
+F.	Halaman Tambah Pasien
+Gambar x.x menunjukkan rancangan antarmuka halaman tambah pasien yang digunakan untuk menambahkan data pasien baru ke dalam sistem. Pada halaman ini, pengguna dapat mengisi beberapa informasi pasien seperti nama lengkap, tanggal lahir, jenis kelamin, serta data pendukung lainnya. Selain itu, tersedia tombol simpan untuk menyimpan data pasien yang telah diinput sehingga data dapat digunakan pada proses terapi selanjutnya.
+ 
+Gambar x.x
+G.	Halaman Edit Pasien
+Halaman Edit Pasien digunakan untuk memperbarui data pasien yang sudah ada. Pengguna dapat mengubah informasi jika terdapat kesalahan atau perubahan data pasien.
+Sistem memastikan bahwa perubahan yang dilakukan tetap konsisten dengan data yang sudah tersimpan sebelumnya. Dengan fitur ini, data pasien dapat selalu terjaga akurasinya.
+ 
+Gambar x.x
+H.	Halaman Detail Pasien
+Rancangan antarmuka halaman detail pasien ditunjukkan pada Gambar x.x. Tampilan ini menggambarkan desain halaman detail pasien yang akan digunakan pengguna, meliputi informasi identitas pasien, daftar riwayat sesi terapi, tombol mulai sesi terapi baru, serta elemen antarmuka lainnya yang mendukung kemudahan pengguna dalam melihat data pasien secara menyeluruh.
+ 
+Gambar x.x
+I.	Halaman Cek Konektivitas
+Rancangan antarmuka halaman koneksi perangkat juga ditunjukkan pada Gambar x.x. Tampilan ini menggambarkan desain halaman koneksi perangkat yang akan digunakan pengguna, meliputi daftar perangkat yang tersedia, status koneksi perangkat, tombol refresh, serta elemen antarmuka lainnya yang mendukung kemudahan pengguna dalam menghubungkan perangkat terapi ke sistem.
+ 
+Gambar x.x
+J.	Halaman Riwayat Sesi
+Rancangan antarmuka halaman riwayat sesi juga ditunjukkan pada Gambar x.x. Tampilan ini menggambarkan desain halaman riwayat sesi yang akan digunakan pengguna, meliputi daftar riwayat sesi terapi, informasi detail sesi, tombol filter, serta elemen antarmuka lainnya yang mendukung kemudahan pengguna dalam memantau perkembangan pasien.
+ 
+Gambar x.x
+3.3	Coding
+Tahap coding dilakukan dengan mengimplementasikan desain sistem ke dalam bentuk kode program agar aplikasi dapat dijalankan sesuai kebutuhan yang telah dirancang sebelumnya. Pada tahap ini, pengembangan sistem menerapkan beberapa prinsip pengembangan perangkat lunak agar kode yang dihasilkan lebih terstruktur, mudah dipahami, dan mudah dikembangkan kembali di masa mendatang.
+Beberapa prinsip yang diterapkan pada tahap coding antara lain sebagai berikut:
+1.	Simplicity
+Pengembangan sistem dilakukan dengan menjaga kesederhanaan struktur kode agar mudah dipahami dan dipelihara. Setiap fitur dikembangkan dengan alur yang jelas tanpa menambahkan kompleksitas yang tidak diperlukan. 
+2.	Modularity
+Kode program dibagi ke dalam beberapa modul atau komponen sesuai fungsi masing-masing sehingga memudahkan proses pengembangan, pengujian, serta pemeliharaan sistem. 
+3.	Reusability
+Komponen dan fungsi yang dapat digunakan kembali dirancang untuk mengurangi duplikasi kode sehingga proses pengembangan menjadi lebih efisien. 
+4.	Refactoring
+Proses perbaikan dan penataan ulang kode dilakukan secara berkala tanpa mengubah fungsi utama sistem. Refactoring bertujuan meningkatkan keterbacaan kode dan kualitas struktur program. 
+5.	Consistency
+Penulisan kode dilakukan secara konsisten, baik dari segi penamaan variabel, struktur folder, maupun format penulisan kode sehingga memudahkan proses pengembangan secara berkelanjutan.
+3.4	Testing
+Fase akhir merupakan tahap penutupan kegiatan penelitian dan pengembangan sistem. Pada tahap ini dilakukan evaluasi menyeluruh terhadap hasil implementasi aplikasi, termasuk pengujian fungsionalitas utama seperti autentikasi pengguna, manajemen klinik, pelaksanaan sesi terapi, monitoring EEG, pencatatan event scene VR, serta penyimpanan data sesi ke cloud. 
+Mengingat aplikasi ini dikembangkan menggunakan kerangka kerja React Native yang ditujukan untuk memfasilitasi komunikasi perangkat keras medis secara real-time di platform mobile, pengujian tidak hanya dititikberatkan pada keberhasilan sistem secara teknis, tetapi juga pada kualitas interaksi pengguna (User Experience). Oleh karena itu, tahap pengujian pada penelitian ini dibagi menjadi tiga pendekatan utama:
+1.	Pengujian Fungsionalitas Sistem (Black-Box Testing)
 Pengujian ini berfokus pada verifikasi logika dan fitur teknis aplikasi. Skenario pengujian dirancang untuk memastikan bahwa proses transmisi data via koneksi Bluetooth dari perangkat penyadap EEG, pencatatan metadata dari headset Virtual Reality (Meta Quest), serta sinkronisasi riwayat terapi ke layanan backend (Supabase) dapat beroperasi dengan lancar dan bebas dari bug. Pengujian ini dilakukan secara iteratif pada setiap akhir siklus pengembangan untuk menjaga stabilitas sistem.
-
-1. Pengujian Heuristik (Heuristic Evaluation)
-
+2.	Pengujian Heuristik (Heuristic Evaluation)
 Sebelum aplikasi diujikan kepada pengguna akhir, antarmuka aplikasi dievaluasi terlebih dahulu oleh pakar (expert evaluator) menggunakan sembilan prinsip Heuristic Mobile. Evaluasi ini bertujuan untuk mengidentifikasi celah usability sedini mungkin—seperti kejelasan indikator status koneksi perangkat atau konsistensi navigasi—tanpa harus melibatkan pengguna akhir secara langsung. Setiap temuan masalah antarmuka diklasifikasikan menggunakan skala Severity Rating (1 hingga 5) untuk menentukan prioritas perbaikan yang harus dilakukan oleh pengembang.
 
-1. Pengujian Usabilitas (Usability Testing)
-
+3.	Pengujian Usabilitas (Usability Testing)
 Setelah fungsionalitas dan antarmuka dinilai cukup stabil dari hasil evaluasi heuristik, pengujian dilanjutkan dengan melibatkan representasi pengguna akhir, yaitu tenaga medis (dokter gigi atau perawat). Pengujian ini menggunakan skenario tugas (task scenarios) yang mensimulasikan kondisi klinis sesungguhnya untuk mengukur tiga metrik utama:
-
 Learnability (Tingkat Keberhasilan): Diukur melalui perhitungan Success Rate saat tenaga medis mengeksekusi skenario, seperti mendaftarkan pasien baru atau memantau grafik gelombang otak selama terapi berjalan.
-
 Efficiency (Efisiensi Waktu): Diukur berdasarkan time-based efficiency, yaitu jumlah waktu (dalam detik) yang dibutuhkan pengguna untuk merespons dan menyelesaikan setiap skenario tugas di tengah kesibukan praktik medis.
-
 Satisfaction (Kepuasan Pengguna): Diukur menggunakan instrumen kuesioner System Usability Scale (SUS) yang terdiri dari 10 butir pernyataan. Metode ini digunakan untuk memperoleh penilaian objektif yang dapat dikuantifikasi menjadi skor akhir terkait tingkat penerimaan dan kepuasan tenaga medis terhadap aplikasi.
 
 ## BAB IV
